@@ -1,0 +1,37 @@
+{
+  "name": "dataseq.storage",
+  "version": "0.0.1",
+  "description": "Nodejs module for storing data sequences on DynamoDB",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "lint": "eslint .",
+    "docs": "jsdoc ./lib -d ./docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dataseq/dataseq.storage.git"
+  },
+  "keywords": [
+    "dataseq",
+    "sequences",
+    "sequence",
+    "storage",
+    "seqs"
+  ],
+  "author": "Dumitru Cantea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dataseq/dataseq.storage/issues"
+  },
+  "homepage": "https://github.com/dataseq/dataseq.storage",
+  "dependencies": {
+    "bluebird": "^3.0.2",
+    "joi": "^6.10.0",
+    "vogels": "^2.0.0-rc10"
+  },
+  "devDependencies": {
+    "dotenv": "^1.2.0",
+    "mocha": "^2.3.3"
+  }
+}
