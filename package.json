@@ -1,7 +1,7 @@
 {
   "name": "dataseq.storage",
   "version": "0.0.1",
-  "description": "Nodejs module for storing data sequences on DynamoDB",
+  "description": "Nodejs module for storing data sequences in DynamoDB",
   "main": "./lib/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
