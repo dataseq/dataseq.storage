@@ -6,16 +6,16 @@ if (!process.env.AWS_REGION) {
 	return;
 }
 
-var utils = require('../../lib/utils');
-var Promise = utils.Promise;
 var storage = require('../../lib');
 var ControlService = storage.ControlService;
 var AccessService = storage.AccessService;
-var config = storage.config;
+var cacheAccessService = new storage.CacheAccessService();
 
 var data = {
 	accessService: new AccessService(),
 	controlService: new ControlService(),
+	cacheAccessService: cacheAccessService,
+	secureControlService: new storage.SecureControlService(cacheAccessService),
 	createTables: storage.createTables,
 	deleteTables: storage.deleteTables
 };
