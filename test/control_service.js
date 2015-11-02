@@ -21,7 +21,9 @@ describe('ControlService', function() {
 	});
 
 	after('deleteTables', function() {
-		return Data.deleteTables('iam-sure');
+		return Data.deleteTables('iam-sure').then(function() {
+			return Promise.delay(1000 * 10);
+		});
 	});
 
 	var controlService = Data.controlService;
@@ -141,10 +143,7 @@ describe('ControlService', function() {
 					assert.equal(undefined, sequence);
 				});
 		});
-	});
-
-	describe('#findSequence()', function() {
-		it('should find one Sequence', function() {
+		it('should find created Sequence', function() {
 			return controlService.createSequence({
 					setId: SET_ID,
 					id: 'ru',
@@ -161,6 +160,45 @@ describe('ControlService', function() {
 						.then(function(foundedSequence) {
 							assert.ok(foundedSequence);
 							assert.equal(sequence.id, foundedSequence.id);
+						});
+				});
+		});
+	});
+
+	describe('#putValue()', function() {
+		var invalidData = require('./common/invalid_values');
+		invalidData.forEach(function(idata) {
+			it('should fail: ' + (idata.name || idata.data.key), function() {
+				return controlService.putValue(idata.data)
+					.catch(function(error) {
+						assert.ok(error);
+					})
+					.then(function(value) {
+						assert.equal(undefined, value);
+					});
+			});
+		});
+
+		it('should fail on creating dublicate values', function() {
+			return controlService.createValue({
+					setId: SET_ID,
+					sequenceId: 'a',
+					value: 1,
+					range: 1
+				})
+				.then(function(value) {
+					var key = SET_ID + '#a';
+					assert.equal(key, value.key);
+					return controlService.createValue({
+							key: key,
+							value: 1,
+							range: 1
+						})
+						.catch(function(error) {
+							assert.ok(error);
+						})
+						.then(function(value2) {
+							assert.equal(undefined, value2);
 						});
 				});
 		});
