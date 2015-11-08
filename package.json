@@ -27,10 +27,9 @@
   "homepage": "https://github.com/dataseq/dataseq.storage",
   "dependencies": {
     "bluebird": "^3.0.2",
-    "joi": "^6.10.0",
     "lodash": "^3.10.1",
     "memory-cache": "^0.1.4",
-    "vogels": "^2.0.0-rc10"
+    "vogels-helpers": "^0.1.0"
   },
   "devDependencies": {
     "dotenv": "^1.2.0",

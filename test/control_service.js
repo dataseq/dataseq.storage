@@ -79,12 +79,13 @@ describe('ControlService', function() {
 					assert.equal(true, !!error.message.indexOf('"name"'));
 				})
 				.then(function(set) {
+					console.log('set', set);
 					assert.equal(undefined, set);
 				});
 		});
 	});
 
-	describe('#findSet()', function() {
+	describe('#getSet()', function() {
 		it('should find one Set', function() {
 			return controlService.createSet({
 					ownerId: OWNER_ID,
@@ -93,7 +94,7 @@ describe('ControlService', function() {
 				.then(function(set) {
 					assert.ok(set);
 					assert.ok(set.id);
-					return accessService.findSet({
+					return accessService.getSet({
 							id: set.id
 						})
 						.then(function(foundedSet) {
@@ -137,6 +138,7 @@ describe('ControlService', function() {
 				})
 				.catch(function(error) {
 					assert.ok(error);
+					// console.log(error);
 					assert.equal('ConditionalCheckFailedException', error.code);
 				})
 				.then(function(sequence) {
@@ -153,7 +155,7 @@ describe('ControlService', function() {
 					assert.ok(sequence);
 					assert.equal('ru', sequence.id);
 					assert.equal(SET_ID, sequence.setId);
-					return accessService.findSequence({
+					return accessService.getSequence({
 							id: sequence.id,
 							setId: sequence.setId
 						})
