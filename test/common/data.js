@@ -15,7 +15,9 @@ var data = {
 	accessService: new AccessService(),
 	controlService: new ControlService(),
 	cacheAccessService: cacheAccessService,
-	secureControlService: new storage.SecureControlService(cacheAccessService),
+	secureControlService: new storage.SecureControlService({
+		accessService: cacheAccessService
+	}),
 	createTables: storage.createTables,
 	deleteTables: storage.deleteTables
 };

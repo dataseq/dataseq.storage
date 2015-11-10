@@ -6,6 +6,7 @@ var Promise = utils.Promise;
 var Data = require('./common/data');
 var OWNER_ID = 'user_id';
 var SET_ID = 'asdfgh0';
+var APP_ID = process.env.DATASEQ_APP_ID;
 
 if (!Data) {
 	return;
@@ -32,33 +33,30 @@ describe('ControlService', function() {
 	describe('#createSet()', function() {
 		it('should create a new Set without id', function() {
 			return controlService.createSet({
-					ownerId: OWNER_ID,
 					name: 'Name 1'
 				})
 				.then(function(set) {
 					assert.ok(set);
 					assert.ok(set.id);
-					assert.equal(OWNER_ID, set.ownerId);
+					assert.equal(APP_ID, set.appId);
 				});
 		});
 
 		it('should create a new Set with id', function() {
 			return controlService.createSet({
 					id: SET_ID,
-					ownerId: OWNER_ID,
 					name: 'Name 1'
 				})
 				.then(function(set) {
 					assert.ok(set);
 					assert.equal(SET_ID, set.id);
-					assert.equal(OWNER_ID, set.ownerId);
+					assert.equal(APP_ID, set.appId);
 				});
 		});
 
 		it('should throw error: wrong id', function() {
 			return controlService.createSet({
 					id: 1,
-					ownerId: OWNER_ID,
 					name: 'Name 2'
 				})
 				.catch(function(error) {
@@ -71,9 +69,7 @@ describe('ControlService', function() {
 		});
 
 		it('should throw error: no name', function() {
-			return controlService.createSet({
-					ownerId: OWNER_ID
-				})
+			return controlService.createSet({})
 				.catch(function(error) {
 					assert.ok(error);
 					assert.equal(true, !!error.message.indexOf('"name"'));
@@ -88,7 +84,6 @@ describe('ControlService', function() {
 	describe('#getSet()', function() {
 		it('should find one Set', function() {
 			return controlService.createSet({
-					ownerId: OWNER_ID,
 					name: 'Name 1'
 				})
 				.then(function(set) {
@@ -109,8 +104,7 @@ describe('ControlService', function() {
 		it('should create a Sequence', function() {
 			return controlService.createSequence({
 					setId: SET_ID,
-					id: 'us',
-					ownerId: OWNER_ID
+					id: 'us'
 				})
 				.then(function(sequence) {
 					assert.ok(sequence);
@@ -121,8 +115,7 @@ describe('ControlService', function() {
 		it('should create second Sequence', function() {
 			return controlService.createSequence({
 					setId: SET_ID,
-					id: 'ro',
-					ownerId: OWNER_ID
+					id: 'ro'
 				})
 				.then(function(sequence) {
 					assert.ok(sequence);
@@ -133,8 +126,7 @@ describe('ControlService', function() {
 		it('should fail on create Sequence', function() {
 			return controlService.createSequence({
 					setId: SET_ID,
-					id: 'ro',
-					ownerId: OWNER_ID
+					id: 'ro'
 				})
 				.catch(function(error) {
 					assert.ok(error);
@@ -148,8 +140,7 @@ describe('ControlService', function() {
 		it('should find created Sequence', function() {
 			return controlService.createSequence({
 					setId: SET_ID,
-					id: 'ru',
-					ownerId: OWNER_ID
+					id: 'ru'
 				})
 				.then(function(sequence) {
 					assert.ok(sequence);

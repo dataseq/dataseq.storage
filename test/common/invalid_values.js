@@ -14,13 +14,13 @@ module.exports = [{
 	}
 }, {
 	data: {
-		key: 'key_key#a',
+		key: 'key_key##a',
 		value: 'val',
 		range: 1
 	}
 }, {
 	data: {
-		key: 'key0Key#a',
+		key: 'key0	Key#a',
 		value: 'val',
 		range: 1
 	}
@@ -32,7 +32,7 @@ module.exports = [{
 	}
 }, {
 	data: {
-		key: 'key1ey_#a',
+		key: 'key\r1ey_#a',
 		value: 'val',
 		range: 1
 	}

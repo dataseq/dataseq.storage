@@ -4,7 +4,6 @@ var assert = require('assert');
 var utils = require('../lib/utils');
 var Promise = utils.Promise;
 var Data = require('./common/data');
-var OWNER_ID = 'user_id';
 var SET_ID = 'asdfgh0';
 
 if (!Data) {
@@ -13,7 +12,7 @@ if (!Data) {
 
 function foo() {}
 
-describe('CacheControlService', function() {
+describe('SecureControlService', function() {
 	this.timeout(1000 * 60);
 
 	before('createTables', function() {
@@ -33,7 +32,6 @@ describe('CacheControlService', function() {
 		it('should create a set with an id', function() {
 			return controlService.createSet({
 					id: SET_ID,
-					ownerId: OWNER_ID,
 					name: 'Name 1'
 				})
 				.then(function(value) {
@@ -49,8 +47,6 @@ describe('CacheControlService', function() {
 					sequenceId: 'a',
 					range: 1,
 					value: 10
-				}, {
-					ownerId: OWNER_ID
 				})
 				.catch(function(error) {
 					assert.ok(error);
@@ -66,8 +62,6 @@ describe('CacheControlService', function() {
 					key: SET_ID + '#a',
 					range: 1,
 					value: 10
-				}, {
-					ownerId: OWNER_ID
 				})
 				.then(function(value) {
 					assert.equal(SET_ID + '#a', value.key);
