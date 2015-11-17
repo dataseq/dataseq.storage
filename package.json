@@ -1,6 +1,6 @@
 {
   "name": "dataseq.storage",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Nodejs module for storing data sequences in DynamoDB",
   "main": "./lib/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "bluebird": "^3.0.2",
     "lodash": "^3.10.1",
     "memory-cache": "^0.1.4",
-    "vogels-helpers": "^0.1.0"
+    "vogels-helpers": "^0.1.2"
   },
   "devDependencies": {
     "dotenv": "^1.2.0",
